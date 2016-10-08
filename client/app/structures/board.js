@@ -95,6 +95,9 @@ export default class Board {
 
   drawVertex(vertex, ctx){
     // get canvas
+    if(vertex.getSelected) {
+      ctx.lineWidth = 15
+    }
     ctx.beginPath();
     ctx.fillStyle = vertex.getColor() // color based on population of both sides
     ctx.arc(vertex.getXCoord, vertex.getYCoord, 50,0,2*Math.PI);
@@ -105,7 +108,7 @@ export default class Board {
     ctx.arc(vertex.getXCoord, vertex.getYCoord, 50,0,2*Math.PI);
     ctx.stroke();
 
-
+    ctx.lineWidth = 1
   }
   drawEdge(edge, ctx){
     // get canvas
@@ -116,6 +119,23 @@ export default class Board {
     ctx.lineTo(edge.getVertexB.getXCoord,edge.getVertexB.getYCoord);
 
     ctx.stroke();
+  }
+
+  onClick(x,y) {
+    for(var i=0; i<this.vertices.length; i++) {
+      var verX = this.vertices[i].getXCoord
+      var verY = this.vertices[i].getYCoord
+      var distX = Math.abs(verX-x)
+      var distY = Math.abs(verY-y)
+      var hyp = Math.floor(Math.sqrt(Math.pow(distX,2)+Math.pow(distY,2)))
+      if (hyp < 50) {
+        console.log(this.vertices[i])
+        this.vertices[i].setSelected(true)
+      }
+      else {
+        this.vertices[i].setSelected(false)
+      }
+    }
   }
   updateBoard(){
 
