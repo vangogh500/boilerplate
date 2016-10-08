@@ -26,6 +26,9 @@ export default class GameContainer extends React.Component {
       socket.on('joinRoom', (room) => {
         this.setState({ view: ROOM, room: room})
       })
+      socket.on('updateRoom', (room) => {
+        this.setState({ room: room })
+      })
     }
     else if(e.target.name == 'update') {
       this.state.socket.emit('getLobby')
@@ -34,7 +37,7 @@ export default class GameContainer extends React.Component {
       this.state.socket.emit('createRoom')
     }
     else {
-      this.state.socket.emit('join', id)
+      this.state.socket.emit('joinRoom', id)
     }
   }
   render() {
@@ -56,10 +59,12 @@ export default class GameContainer extends React.Component {
               <div className="collection">
                 {
                   this.state.lobby.map((room) => {
+                    var isFull = room.players.length >= 2
                     return (
                       <a key={room.id} className="collection-item room row">
-                        <span className="black-text col s10 id">{room.id}</span>
-                        <span name="join" className="btn col s2" onClick={(e) => this.handleClick(e, room.id)}>Join</span>
+                        <span className="black-text col s8 id">{room.id}</span>
+                        <span className="col s2 id">{ room.players.length + " / 2"}</span>
+                        <span className={"btn col s2 " + (isFull ? "hidden" : "")} onClick={(e) => this.handleClick(e, room.id)}>Join</span>
                       </a>
                     )
                   })
@@ -77,12 +82,16 @@ export default class GameContainer extends React.Component {
               </div>
               <div className="row">
                 <div className="col s2 blue lighten-5 vh-100">
+                  <h5 className="center">Host</h5>
+                  <h6 className="center">{this.state.room.players[0]}</h6>
                 </div>
                 <div className="col s8">
                   <canvas id="canvas">
                   </canvas>
                 </div>
                 <div className="col s2 red lighten-5 vh-100">
+                  <h5 className="center">Virus</h5>
+                  <h6 className="center">{this.state.room.players[1] || "waiting for player..."}</h6>
                 </div>
               </div>
             </div>
