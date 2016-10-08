@@ -1,26 +1,25 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-export default class Game extends React.Component {
+export default class GameContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      
+      socket: null
     }
   }
   handleClick(e) {
+    console.log(e.target.name)
     e.preventDefault()
-
+    this.setState({socket: io.connect('http://localhost:8080')})
   }
   render() {
     return (
       <div className="game-container white">
         <div className="center">
-          <a className="btn waves-effect waves-light start-btn" onClick={(e) => handleClick(e)}>Start</a>
+          <a name="start" className="btn waves-effect waves-light start-btn" onClick={(e) => this.handleClick(e)}>Start</a>
         </div>
       </div>
     )
   }
 }
-var socket = io.connect('http://localhost:8080')
-socket.emit("click")

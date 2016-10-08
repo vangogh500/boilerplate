@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Game from './game'
+import GameContainer from './gamecontainer'
 import Navbar from './navbar'
 
 class App extends React.Component {
@@ -8,7 +8,7 @@ class App extends React.Component {
     return (
       <div>
         <Navbar />
-        <Game />
+        <GameContainer />
       </div>
     )
   }
