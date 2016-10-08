@@ -1,9 +1,11 @@
 // Constructor for node with spawnRate, virusCount (0), antibodyCount (0)
-class Vertex {
-  constructor(spawnRate, virusCount, antibodyCount){
+export default class Vertex {
+  constructor(spawnRate, virusCount, antibodyCount, xCoord, yCoord){
     this.spawnRate = spawnRate;
     this.virusCount = virusCount;
     this.antibodyCount = antibodyCount;
+    this.xCoord = xCoord;
+    this.yCoord = yCoord;
   }
 
   get balance() {
@@ -20,6 +22,14 @@ class Vertex {
     else {
       // Protected vertex with abs(this.balance) amount of antibodyCount
     }
+  }
+
+  get xCoord(){
+    return this.xCoord;
+  }
+  
+  get yCoord(){
+    return this.yCoord;
   }
 
 }
