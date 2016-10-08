@@ -7,8 +7,15 @@ class Room {
   addPlayer(player) {
     this.players.push(player)
   }
+  removePlayer(player) {
+    var i = this.players.indexOf(player)
+    this.players.splice(i, 1)
+  }
   isFull() {
     return this.players.length >= 2
+  }
+  isEmpty() {
+    return this.players.length <= 0
   }
 }
 module.exports = Room
