@@ -4,4 +4,12 @@ export default class Edge {
     this.vertexB = vertexB;
   }
 
+  get getVertexA(){
+    return this.vertexA;
+  }
+
+  get getVertexB(){
+    return this.vertexB;
+  }
+
 }
