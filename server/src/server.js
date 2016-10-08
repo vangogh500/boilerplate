@@ -7,12 +7,12 @@ var server = require('http').createServer(app)
 var io = require('socket.io').listen(server)
 server.listen(8080)
 
-var rooms = []
-
+var Room = require('../game/room.js')
+var lobby = [new Room(), new Room(), new Room()]
 io.sockets.on('connection', function (socket) {
-  console.log("connected")
-  socket.emit("welcome", rooms)
-  socket.on("click", function(socket) {
-
+  socket.emit("welcome", lobby)
+  socket.on("createRoom", function() {
+    lobby.push(new Room())
+    socket.emit('updateLobby', lobby)
   })
 })

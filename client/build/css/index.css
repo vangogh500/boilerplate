@@ -2,9 +2,36 @@ nav {
   height: 70px;
 }
 
-.game-container {
-  padding-top: 50vh;
+.vh-100 {
   height: 100vh;
+}
+
+.lobby {
+  margin-left: 25vw;
+  margin-right: 25vw;
+  min-height: 80vh;
+  margin-top: 30px;
+  padding: 30px;
+  position: relative;
+}
+
+.room {
+  text-align: left;
+}
+
+.room .id {
+  padding-top: 5px;
+}
+
+.lobby .create {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.start-menu {
+  padding-top: 50vh;
   background-image: url('../img/blood.gif');
   background-size: cover;
 }

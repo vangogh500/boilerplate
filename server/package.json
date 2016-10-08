@@ -6,7 +6,7 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon ./src/server.js"
+    "dev": "nodemon --use_strict ./src/server.js"
   },
   "dependencies": {
     "bcryptjs": "^2.3.0",
