@@ -1,15 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Game from './game'
+import Navbar from './navbar'
 
 class App extends React.Component {
   render() {
     return (
-      <h1>HELLO</h1>
+      <div>
+        <Navbar />
+        <Game />
+      </div>
     )
   }
 }
 
 ReactDOM.render(
-  <App />,
+  <App/>,
   document.getElementById('app')
 );

@@ -1,0 +1,16 @@
+nav {
+  height: 70px;
+}
+
+.game-container {
+  padding-top: 50vh;
+  height: 100vh;
+  background-image: url('../img/blood.gif');
+  background-size: cover;
+}
+
+.start-btn {
+  height: 50px;
+  width: 200px;
+  padding-top: 7px;
+}
