@@ -25,11 +25,32 @@ export default class Board {
     // initialize vertices
     // Vertex(spawnRate, virusCount, antibodyCount, xCoord, yCoord)
     //added viruses and antibodies to test color transition
+
+    /*
     var vertices = [];
     for (i = 0; i < this.getNumberOfVertices; i++){
       vertices[i] = new Vertex(10,i*20,0, (50 + (i*200)) , (50 + (i%2)*50) );
     }
+    */
 
+    //hard code for the map
+    //vertices
+    var brain = new Vertex(10,200,0,50,250)
+    drawVertex(brain)
+    var lung1 = new Vertex(10,0,200,150,150)
+    drawVertex(lung1)
+    var lung2 = new Vertex(10,0,0,150,350)
+    drawVertex(lung2)
+    var heart = new Vertex(10,0,0,250,150)
+    drawVertex(heart)
+    var liver = new Vertex(10,0,0,275,350)
+    drawVertex(liver)
+    var stomach = new Vertex(10,0,0,350,350)
+    drawVertex(stomach)
+    var kidney1 = new Vertex(10,0,0,350,450)
+    drawVertex(kidney1)
+    var kidney2 = new Vertex(10,0,0,450,450)
+    drawVertex(kidney2)
     //initialize edges
     var edges = [];
     for (i = 0; i < (this.getNumberOfVertices - 1); i++){
@@ -44,10 +65,11 @@ export default class Board {
     }
 
     //draw vertices
+    /*
     for (var i = 0; i < vertices.length; i++){
       this.drawVertex(vertices[i])
     }
-
+    */
   }
 
   drawVertex(vertex){
