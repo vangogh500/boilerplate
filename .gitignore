@@ -2,3 +2,5 @@ node_modules
 .DS_Store
 
 *.log
+
+client/build/js/app.js
