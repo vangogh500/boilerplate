@@ -20,7 +20,7 @@ class App extends React.Component {
 class Test extends React.Component {
   render() {
     return (
-      <div>
+      <div className = "deep-orange lighten-3">
         <canvas id="canvas"></canvas>
       </div>
     )

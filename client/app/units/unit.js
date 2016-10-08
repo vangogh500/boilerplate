@@ -1,7 +1,6 @@
 // Constructor for node with spawnRate, virusCount (0), antibodyCount (0)
 export default class Unit{
-  constructor(containingVertex, xCoord, yCoord){
-    this.containingVertex = containingVertex;
+  constructor(xCoord, yCoord){
     this.xCoord = xCoord;
     this.yCoord = yCoord;
   }
