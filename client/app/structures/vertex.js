@@ -1,14 +1,11 @@
 // Constructor for node with spawnRate, virusCount (0), antibodyCount (0)
 export default class Vertex{
-//class Vertex{
-  constructor(spawnRate, virusCount, antibodyCount, xCoord, yCoord, colorSwitch){
+  constructor(spawnRate, virusCount, antibodyCount, xCoord, yCoord){
     this.spawnRate = spawnRate;
     this.virusCount = virusCount;
     this.antibodyCount = antibodyCount;
     this.xCoord = xCoord;
     this.yCoord = yCoord;
-    this.colorSwitch=colorSwitch;
-    this.updateColor();
   }
 
 //added gets for color method
