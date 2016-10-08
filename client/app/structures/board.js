@@ -35,35 +35,55 @@ export default class Board {
 
     //hard code for the map
     //vertices
-    var brain = new Vertex(10,200,0,50,250)
-    drawVertex(brain)
-    var lung1 = new Vertex(10,0,200,150,150)
-    drawVertex(lung1)
-    var lung2 = new Vertex(10,0,0,150,350)
-    drawVertex(lung2)
-    var heart = new Vertex(10,0,0,250,150)
-    drawVertex(heart)
-    var liver = new Vertex(10,0,0,275,350)
-    drawVertex(liver)
-    var stomach = new Vertex(10,0,0,350,350)
-    drawVertex(stomach)
-    var kidney1 = new Vertex(10,0,0,350,450)
-    drawVertex(kidney1)
-    var kidney2 = new Vertex(10,0,0,450,450)
-    drawVertex(kidney2)
+    var brain = new Vertex(10,0,200,50,250)
+    var lung1 = new Vertex(10,0,0,250,150)
+    var lung2 = new Vertex(10,0,0,250,350)
+    var heart = new Vertex(10,0,0,450,150)
+    var liver = new Vertex(10,0,0,500,350)
+    var stomach = new Vertex(10,0,0,675,300)
+    var kidney1 = new Vertex(10,0,0,550,480)
+    var kidney2 = new Vertex(10,200,0,800,480)
     //initialize edges
+    var edge1 = new Edge(brain,lung1)
+    var edge2 = new Edge(brain,lung2)
+    var edge3 = new Edge(lung1,heart)
+    var edge4 = new Edge(heart,liver)
+    var edge5 = new Edge(heart,stomach)
+    var edge6 = new Edge(stomach,kidney1)
+    var edge7 = new Edge(stomach,kidney2)
+
+    //draw edges
+    this.drawEdge(edge1)
+    this.drawEdge(edge2)
+    this.drawEdge(edge3)
+    this.drawEdge(edge4)
+    this.drawEdge(edge5)
+    this.drawEdge(edge6)
+    this.drawEdge(edge7)
+
+    //draw vertecies
+    this.drawVertex(brain);
+    this.drawVertex(lung1)
+    this.drawVertex(lung2)
+    this.drawVertex(heart)
+    this.drawVertex(liver)
+    this.drawVertex(stomach)
+    this.drawVertex(kidney1)
+    this.drawVertex(kidney2)
+    /*
     var edges = [];
     for (i = 0; i < (this.getNumberOfVertices - 1); i++){
       edges[i] = new Edge(vertices[i], vertices[i+1]);
     }
-
+    */
     //draw edges first so that vertices overlay
 
     //draw edges
+    /*
     for (var i = 0; i < edges.length; i++){
       this.drawEdge(edges[i])
     }
-
+    */
     //draw vertices
     /*
     for (var i = 0; i < vertices.length; i++){
@@ -82,6 +102,11 @@ export default class Board {
     ctx.arc(vertex.getXCoord, vertex.getYCoord, 50,0,2*Math.PI);
     ctx.fill();
 
+    ctx.beginPath();
+    ctx.strokeStyle="black";
+    ctx.arc(vertex.getXCoord, vertex.getYCoord, 50,0,2*Math.PI);
+    ctx.stroke();
+
 
   }
   drawEdge(edge){
@@ -90,7 +115,7 @@ export default class Board {
     var ctx = c.getContext("2d");
 
     ctx.beginPath();
-    ctx.strokeStyle="blue"; // Blue path
+    ctx.strokeStyle="black"; // Black path
 
     ctx.moveTo(edge.getVertexA.getXCoord,edge.getVertexA.getYCoord);
     ctx.lineTo(edge.getVertexB.getXCoord,edge.getVertexB.getYCoord);
