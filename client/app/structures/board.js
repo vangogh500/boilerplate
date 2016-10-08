@@ -1,6 +1,6 @@
 // Generates Board and vertexs
 
-import Vertex from './vertex.js';
+import Vertex from './vertex.js'
 import Edge from './edge.js';
 import Generator from './generator.js';
 import Spawner from './spawner.js';
