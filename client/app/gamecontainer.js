@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 
 const WELCOME = 'WELCOME'
 const LOBBY = 'LOBBY'
+const ROOM = 'ROOM'
 
 export default class GameContainer extends React.Component {
   constructor(props) {
@@ -15,12 +16,19 @@ export default class GameContainer extends React.Component {
     e.preventDefault()
     if(e.target.name == 'start') {
       var socket = io.connect('http://localhost:8080')
-      socket.on('welcome', (lobby) => {
-        this.setState({socket: socket, view: LOBBY, lobby: lobby })
+      socket.on('welcome', data => {
+        console.log(data)
+        this.setState({socket: socket, view: LOBBY, lobby: data.lobby, player: data.playerId })
       })
       socket.on('updateLobby', (lobby) => {
         this.setState({lobby: lobby})
       })
+      socket.on('joinRoom', (room) => {
+        this.setState({ view: ROOM, room: room})
+      })
+    }
+    else if(e.target.name == 'update') {
+      this.state.socket.emit('getLobby')
     }
     else if(e.target.name == 'createRoom') {
       this.state.socket.emit('createRoom')
@@ -57,7 +65,26 @@ export default class GameContainer extends React.Component {
                   })
                 }
               </div>
+              <a name="update" className="btn grey" onClick={(e) => this.handleClick(e)}>Update Lobby</a>
               <a name="createRoom" className="btn create" onClick={(e) => this.handleClick(e)}>Create Room</a>
+            </div>
+          )
+        case ROOM:
+          return (
+            <div>
+              <div className="center room-header">
+                <h5>Room ID: {this.state.room.id}</h5>
+              </div>
+              <div className="row">
+                <div className="col s2 blue lighten-5 vh-100">
+                </div>
+                <div className="col s8">
+                  <canvas id="canvas">
+                  </canvas>
+                </div>
+                <div className="col s2 red lighten-5 vh-100">
+                </div>
+              </div>
             </div>
           )
       }
