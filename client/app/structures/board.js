@@ -1,6 +1,6 @@
 // Generates Board and vertexs
 
-import Vertex from './vertex.js'
+import Vertex from './vertex.js';
 import Edge from './edge.js';
 import Generator from './generator.js';
 import Spawner from './spawner.js';
@@ -24,9 +24,10 @@ export default class Board {
 
     // initialize vertices
     // Vertex(spawnRate, virusCount, antibodyCount, xCoord, yCoord)
+    //added viruses and antibodies to test color transition
     var vertices = [];
     for (i = 0; i < this.getNumberOfVertices; i++){
-      vertices[i] = new Vertex(10,0,0, (50 + (i*200)) , (50 + (i%2)*50) );
+      vertices[i] = new Vertex(10,i*20,0, (50 + (i*200)) , (50 + (i%2)*50) );
     }
 
     //initialize edges
@@ -55,8 +56,7 @@ export default class Board {
     var ctx = c.getContext("2d");
 
     ctx.beginPath();
-    ctx.fillStyle='gainsboro'; // Grey, neutral fill
-
+    ctx.fillStyle = vertex.color(vertex) // color based on population of both sides
     ctx.arc(vertex.getXCoord, vertex.getYCoord, 50,0,2*Math.PI);
     ctx.fill();
 
