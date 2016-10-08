@@ -3,10 +3,8 @@ import Virus from '../units/virus.js';
 
 // Constructor for node with spawnRate, virusCount (0), antibodyCount (0)
 export default class Vertex{
-//class Vertex{
   constructor(spawnRate, virusCount, antibodyCount, xCoord, yCoord){
-    this.viruses = [];
-    this.antibodies = [];
+
     this.spawnRate = spawnRate;
     this.virusCount = virusCount;
     this.antibodyCount = antibodyCount;
@@ -41,28 +39,6 @@ export default class Vertex{
 
   get getYCoord(){
     return this.yCoord;
-  }
-
-  addAntibody(newAntibodies){
-    this.antibodies.concat(newAntibodies);
-  }
-
-  addVirus(newViruses){
-    this.antibodies.concat(newViruses);
-  }
-
-  removeAntibodies(percentage){
-    var numToRemove = Math.floor(this.antibodyCount*percentage/100);
-    var removedAntibodies = this.antibodies.slice(0, numToRemove);
-    this.antibodies = this.antibodies.slice(numToRemove,antibodyCount);
-    return removedAntibodies;
-  }
-
-  removeViruses(percentage){
-    var numToRemove = Math.floor(this.virusCount*percentage/100);
-    var removedViruses = this.antibodies.slice(0, numToRemove);
-    this.viruses = this.antibodies.slice(numToRemove,virusCount);
-    return removedViruses;
   }
 
   updateCellCount()
