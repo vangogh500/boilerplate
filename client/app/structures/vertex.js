@@ -12,18 +12,6 @@ export default class Vertex {
       return (this.virusCount - this.antibodyCount)
   }
 
-  colorVertex(){
-    if (this.getBalance > 0){
-      // Infected vertex with this.balance amount of virusCount
-    }
-    else if (this.getBalance == 0){
-      // Neutral vertex
-    }
-    else {
-      // Protected vertex with abs(this.balance) amount of antibodyCount
-    }
-  }
-
   get getXCoord(){
     return this.xCoord;
   }
