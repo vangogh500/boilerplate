@@ -11,9 +11,25 @@ export default class Vertex{
     this.updateColor();
   }
 
-
-  get getBalance() {
-      return (this.virusCount - this.antibodyCount)
+//added gets for color method
+  get getAntibodyCount() {
+    return (this.antibodyCount)
+  }
+  get getVirusCount() {
+    return (this.virusCount)
+  }
+//to determine color transition, returns a string
+  color(vertex) {
+    var r = 225 - (vertex.getAntibodyCount)
+    var g = 225 - (vertex.getAntibodyCount) - (vertex.getVirusCount)
+    var b = 225 - (vertex.getVirusCount)
+    if (r < 100 && vertex.getVirusCount > 0){
+      r = 100
+    }
+    if (b < 100 && vertex.getAntibodyCount > 0){
+      b = 100
+    }
+    return ('rgb(' + r + ',' + g + ',' + b + ')');
   }
 
   get getXCoord(){
@@ -56,25 +72,5 @@ export default class Vertex{
     }
   }
 
-  //Returns color value given the state of the vertex
-  get updateColor()
-  {
-    var ColorEnum={
-      virus: {value: -1, color: "##DC143C"},
-      none: {value: 0, color:"#000000"},
-      antibody: {value: 1, color:"#00FFFF"}
-    };
-    if(this.colorSwitch==ColorEnum.antibody.value)
-    {
-      return ColorEnum.antibody.color;
-    }
-    else if(this.colorSwitch==ColorEnum.virus.value)
-    {
-      return ColorEnum.virus.color;
-    }
-    else{
-      return ColorEnum.none.color;
-    }
-  }
 
 }

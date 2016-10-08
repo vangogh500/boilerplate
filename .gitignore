@@ -4,3 +4,4 @@ node_modules
 *.log
 
 client/build/js/app.js
+client/test.html
