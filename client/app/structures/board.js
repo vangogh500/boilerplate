@@ -84,6 +84,17 @@ export default class Board {
     */
   }
 
+  getNeighbors(vertex){
+    var neighbors = [];
+    for (var i = 0; i< this.edges.length; i++){
+      var other = this.edges[i].getOtherVertex(vertex)
+      if(other) {
+        neighbors.push(other)
+      }
+    }
+    return neighbors
+  }
+
   drawMap(ctx) {
     for(var i=0; i<this.edges.length; i++) {
       this.drawEdge(this.edges[i], ctx)
@@ -95,8 +106,11 @@ export default class Board {
 
   drawVertex(vertex, ctx){
     // get canvas
-    if(vertex.getSelected) {
+    if(vertex == self.selected) {
       ctx.lineWidth = 15
+    }
+    else if(vertex == self.hover) {
+      ctx.lineWidth = 5
     }
     ctx.beginPath();
     ctx.fillStyle = vertex.getColor() // color based on population of both sides
@@ -122,6 +136,8 @@ export default class Board {
   }
 
   onClick(x,y) {
+    self.selected = null;
+    self.hover = null;
     for(var i=0; i<this.vertices.length; i++) {
       var verX = this.vertices[i].getXCoord
       var verY = this.vertices[i].getYCoord
@@ -132,14 +148,31 @@ export default class Board {
       var hyp = Math.floor(Math.sqrt(Math.pow(distX,2)+Math.pow(distY,2)))
 
       if (hyp < 50) {
-        console.log(this.vertices[i])
-        this.vertices[i].setSelected(true)
-      }
-      else {
-        this.vertices[i].setSelected(false)
+        self.selected = this.vertices[i]
+        break
       }
     }
   }
+  onHover(x,y, cb) {
+    var neighbors = this.getNeighbors(self.selected)
+    for(var i=0; i<neighbors.length; i++) {
+      var verX = neighbors[i].getXCoord
+      var verY = neighbors[i].getYCoord
+
+      var distX = Math.abs(verX-x)
+      var distY = Math.abs(verY-y)
+
+      var hyp = Math.floor(Math.sqrt(Math.pow(distX,2)+Math.pow(distY,2)))
+
+      if (hyp < 50) {
+        self.hover = neighbors[i]
+        console.log("hover neighbor")
+        cb()
+        break
+      }
+    }
+  }
+
   updateBoard(){
 
   }

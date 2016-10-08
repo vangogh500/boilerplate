@@ -21,8 +21,14 @@ class Game {
       board.onClick(x,y)
       this.draw()
     })
+    self.canvas.addEventListener("mousemove", (event) => {
+      var x = event.pageX - elemLeft,
+        y = event.pageY - elemTop;
+      board.onHover(x,y, this.draw)
+    })
   }
   draw() {
+    console.log("draw")
     var w = self.canvas.width
     var h = self.canvas.height
     self.ctx.clearRect(0, 0, w, h);

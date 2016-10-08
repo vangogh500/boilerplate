@@ -13,7 +13,6 @@ export default class Vertex{
     this.antibodyCount = antibodyCount;
     this.xCoord = xCoord;
     this.yCoord = yCoord;
-    this.selected = false
   }
 
 //added gets for color method
@@ -23,12 +22,7 @@ export default class Vertex{
   get getVirusCount() {
     return (this.virusCount);
   }
-  get getSelected() {
-    return this.selected
-  }
-  setSelected(select) {
-    this.selected = select
-  }
+
 //to determine color transition, returns a string
   getColor() {
     var r = 225 - (this.getAntibodyCount);
