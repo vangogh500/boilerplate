@@ -21,7 +21,6 @@ class Test extends React.Component {
   render() {
     return (
       <div>
-        <h1>TEST</h1>
         <canvas id="canvas"></canvas>
       </div>
     )
