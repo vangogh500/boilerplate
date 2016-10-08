@@ -44,6 +44,9 @@ export default class Board {
     var stomach = new Vertex(10,0,0,675,300)
     var kidney1 = new Vertex(10,0,0,550,480)
     var kidney2 = new Vertex(10,200,0,800,480)
+
+    this.vertices = [brain, lung1, lung2, heart, liver, stomach, kidney1, kidney2]
+
     //initialize edges
     var edge1 = new Edge(brain,lung1)
     var edge2 = new Edge(brain,lung2)
@@ -53,24 +56,12 @@ export default class Board {
     var edge6 = new Edge(stomach,kidney1)
     var edge7 = new Edge(stomach,kidney2)
 
+    this.edges = [edge1, edge2, edge3, edge4, edge5, edge6, edge7]
+
     //draw edges
-    this.drawEdge(edge1)
-    this.drawEdge(edge2)
-    this.drawEdge(edge3)
-    this.drawEdge(edge4)
-    this.drawEdge(edge5)
-    this.drawEdge(edge6)
-    this.drawEdge(edge7)
 
     //draw vertecies
-    this.drawVertex(brain);
-    this.drawVertex(lung1)
-    this.drawVertex(lung2)
-    this.drawVertex(heart)
-    this.drawVertex(liver)
-    this.drawVertex(stomach)
-    this.drawVertex(kidney1)
-    this.drawVertex(kidney2)
+
     /*
     var edges = [];
     for (i = 0; i < (this.getNumberOfVertices - 1); i++){
@@ -93,13 +84,19 @@ export default class Board {
     */
   }
 
-  drawVertex(vertex){
-    // get canvas
-    var c = document.getElementById("canvas");
-    var ctx = c.getContext("2d");
+  drawMap(ctx) {
+    for(var i=0; i<this.edges.length; i++) {
+      this.drawEdge(this.edges[i], ctx)
+    }
+    for(var i=0; i<this.vertices.length; i++) {
+      this.drawVertex(this.vertices[i], ctx)
+    }
+  }
 
+  drawVertex(vertex, ctx){
+    // get canvas
     ctx.beginPath();
-    ctx.fillStyle = vertex.color(vertex) // color based on population of both sides
+    ctx.fillStyle = vertex.getColor() // color based on population of both sides
     ctx.arc(vertex.getXCoord, vertex.getYCoord, 50,0,2*Math.PI);
     ctx.fill();
 
@@ -110,11 +107,8 @@ export default class Board {
 
 
   }
-  drawEdge(edge){
+  drawEdge(edge, ctx){
     // get canvas
-    var c = document.getElementById("canvas");
-    var ctx = c.getContext("2d");
-
     ctx.beginPath();
     ctx.strokeStyle="black"; // Black path
 
