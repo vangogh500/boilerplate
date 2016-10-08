@@ -13,7 +13,6 @@ class Game {
     return self.win
   }
   update() {
-      Vertex.updateCellCount();
       theGame.initialize();
       requestAnimationFrame(update);
     }
