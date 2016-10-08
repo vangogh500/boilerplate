@@ -21,6 +21,11 @@ class Game {
       board.onClick(x,y)
       this.draw()
     })
+    self.canvas.addEventListener("mousemove", (event) => {
+      var x = event.pageX - elemLeft,
+        y = event.pageY - elemTop;
+      board.onHover(x,y, this.draw)
+    })
   }
   draw() {
     var w = self.canvas.width
@@ -32,9 +37,8 @@ class Game {
     return self.win
   }
   update() {
-      theGame.initialize();
-      requestAnimationFrame(update);
-    }
+    // requestAnimationFrame(update);
+  }
 }
 
 
@@ -42,7 +46,8 @@ export function main() {
   var theGame = new Game();
   theGame.initialize()
 
-  while (!theGame.isOver()){
+  /* while (!theGame.isOver()){
     theGame.update()
   }
+  */
 }
