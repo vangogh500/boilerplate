@@ -10,6 +10,7 @@ export default class Board {
     this.numberOfVertices = numberOfVertices;
     this.numberOfGenerators = numberOfGenerators;
     this.numberOfSpawners = numberOfSpawners;
+    this.createMap();
   }
 
   get getNumberOfVertices(){
@@ -24,15 +25,15 @@ export default class Board {
 
     // initialize vertices
     // Vertex(spawnRate, virusCount, antibodyCount, xCoord, yCoord)
-    var vertices = [];
+    self.vertices = [];
     for (i = 0; i < this.getNumberOfVertices; i++){
-      vertices[i] = new Vertex(10,0,0, (50 + (i*200)) , (50 + (i%2)*50) );
+      self.vertices[i] = new Vertex(10,0,0, (50 + (i*200)) , (50 + (i%2)*50),0 );
     }
 
     //initialize edges
-    var edges = [];
+    self.edges = [];
     for (i = 0; i < (this.getNumberOfVertices - 1); i++){
-      edges[i] = new Edge(vertices[i], vertices[i+1]);
+      self.edges[i] = new Edge(vertices[i], vertices[i+1]);
     }
 
     //draw edges first so that vertices overlay
@@ -74,5 +75,8 @@ export default class Board {
     ctx.lineTo(edge.getVertexB.getXCoord,edge.getVertexB.getYCoord);
 
     ctx.stroke();
+  }
+  updateBoard(){
+
   }
 }
