@@ -1,14 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Game from './game'
 import Navbar from './navbar'
+import {main} from './game'
 
 class App extends React.Component {
   render() {
     return (
       <div>
         <Navbar />
-        <Game />
       </div>
     )
   }
@@ -18,3 +17,6 @@ ReactDOM.render(
   <App/>,
   document.getElementById('app')
 );
+
+console.log(main)
+main()

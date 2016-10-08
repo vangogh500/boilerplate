@@ -1,26 +1,21 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+/*
+var c = document.getElementById("canvas");
+var ctx = c.getContext("2d");
 
-export default class Game extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      
-    }
-  }
-  handleClick(e) {
-    e.preventDefault()
+ctx.arc(100,75,50,0,2*Math.PI);
+ctx.fillStyle = 'red';
+ctx.fill();
 
-  }
-  render() {
-    return (
-      <div className="game-container white">
-        <div className="center">
-          <a className="btn waves-effect waves-light start-btn" onClick={(e) => handleClick(e)}>Start</a>
-        </div>
-      </div>
-    )
-  }
+
+ctx.fillStyle= 'blue';
+ctx.arc(0,0,50,0,2*Math.PI);
+ctx.fill();
+*/
+
+import Board from './structures/board.js';
+
+export function main() {
+  var theBoard = new Board(0,0,0);
+  theBoard.createMap();
+  theBoard.drawMap();
 }
-var socket = io.connect('http://localhost:8080')
-socket.emit("click")
