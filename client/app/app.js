@@ -8,6 +8,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <canvas id="canvas"></canvas>
         <Navbar />
         <GameContainer />
       </div>
