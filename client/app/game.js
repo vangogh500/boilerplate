@@ -1,5 +1,5 @@
 import Board from './structures/board.js';
-
+import Vertex from './structures/vertex.js';
 class Game {
   constructor() {
     self.win = false
@@ -7,23 +7,24 @@ class Game {
   initialize() {
     // Board(numberOfVertices, numberOfGenerators, numberOfSpawners)
     self.board = new Board(10,1,1);
-    self.board.createMap();
+    //self.board.createMap();
   }
   isOver() {
     return self.win
   }
   update() {
-
+      Vertex.updateCellCount();
+      theGame.initialize();
+      requestAnimationFrame(update);
     }
 }
 
 
 export function main() {
-  var theGame = new Game()
+  var theGame = new Game();
   theGame.initialize()
-  /*
+
   while (!theGame.isOver()){
     theGame.update()
   }
-  */
 }

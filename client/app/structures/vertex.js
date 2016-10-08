@@ -6,7 +6,6 @@ export default class Vertex{
     this.antibodyCount = antibodyCount;
     this.xCoord = xCoord;
     this.yCoord = yCoord;
-    this.colorSwitch=colorSwitch;
   }
 
 //added gets for color method
