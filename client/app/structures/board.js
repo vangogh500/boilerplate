@@ -1,6 +1,5 @@
 // Generates Board and vertexs
 
-//ASJDALJ
 import Vertex from './vertex.js';
 import Edge from './edge.js';
 import Generator from './generator.js';
@@ -33,15 +32,17 @@ export default class Board {
 
   drawMap(){
 
-    var exampleVertex = new Vertex(10,0,0,500,500);
+    var exampleVertex = new Vertex(10,0,0,0,0);
 
     var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
 
     ctx.beginPath();
-    ctx.arc(exampleVertex.xCoord, exampleVertex.yCoord, 50,0,2*Math.PI);
-    ctx.stroke();
-    ctx.endPath();
+    ctx.fillStyle="green"; // Green path
+    ctx.lineWidth="5";
+
+    ctx.arc(exampleVertex.getXCoord, exampleVertex.getYCoord, 50,0,2*Math.PI);
+    ctx.fill();
 
 
   }

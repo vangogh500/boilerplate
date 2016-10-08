@@ -8,15 +8,15 @@ export default class Vertex {
     this.yCoord = yCoord;
   }
 
-  get balance() {
+  get getBalance() {
       return (this.virusCount - this.antibodyCount)
   }
 
   colorVertex(){
-    if (this.balance > 0){
+    if (this.getBalance > 0){
       // Infected vertex with this.balance amount of virusCount
     }
-    else if (this.balance == 0){
+    else if (this.getBalance == 0){
       // Neutral vertex
     }
     else {
@@ -24,11 +24,11 @@ export default class Vertex {
     }
   }
 
-  get xCoord(){
+  get getXCoord(){
     return this.xCoord;
   }
-  
-  get yCoord(){
+
+  get getYCoord(){
     return this.yCoord;
   }
 
