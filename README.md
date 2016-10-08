@@ -1,2 +1,2 @@
 # boilerplate
-Boilerplate for Node, Express, React
+Boilerplate for Node, Express, React!
