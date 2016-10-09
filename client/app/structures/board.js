@@ -37,7 +37,7 @@ export default class Board {
 
     //hard code for the map
     //vertices
-
+    
     //skeleton vertices
     var b1 = new Vertex(12,0,200, 100,    600)
     var b2 = new Vertex(12,0,0,   400,  600)
@@ -205,6 +205,13 @@ export default class Board {
     }
   }
   updateBoard(){
-
+    for(var i=0;i<this.vertices.length;i++)
+    {
+      this.vertices[i].update();
+    }
+    for(var i=0;i<this.edges.length;i++)
+    {
+      this.edges[i].update();
+    }
   }
 }
