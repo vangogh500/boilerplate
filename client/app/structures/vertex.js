@@ -4,6 +4,7 @@ import Virus from '../units/virus.js';
 // Constructor for node with spawnRate, virusCount (0), antibodyCount (0)
 export default class Vertex{
   constructor(spawnRate, virusCount, antibodyCount, xCoord, yCoord){
+    //console.log("virusCount "+virusCount)
 
     this.spawnRate = spawnRate;
     this.virusCount = virusCount;
@@ -13,12 +14,14 @@ export default class Vertex{
   }
 
 //added gets for color method
-  get getAntibodyCount() {
-    return (this.antibodyCount);
-  }
   get getVirusCount() {
-    return (this.virusCount);
+    return this.virusCount;
+    //return 5
   }
+  get getAntibodyCount() {
+    return this.antibodyCount;
+  }
+
 //to determine color transition, returns a string
   getColor() {
     var r = 225 - (this.getAntibodyCount);
@@ -41,7 +44,7 @@ export default class Vertex{
     return this.yCoord;
   }
 
-  updateCellCount()
+  update()
   {
     //Update Virus counts
     //Equal counts
@@ -53,8 +56,14 @@ export default class Vertex{
         this.antibodyCount=Math.floor(this.antibodyCount*0.8);
       }
       else {
-        this.virusCount-=1;
-        this.antibodyCount-=1;
+        if(this.virusCount!=0)
+        {
+          this.virusCount=this.virusCount-1;
+        }
+        if(this.antibodyCount!=0)
+        {
+          this.antibodyCount= this.antibodyCount-1;
+        }
 
       }
     }

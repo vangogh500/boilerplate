@@ -18,6 +18,7 @@ export default class Board {
   }
 
   createMap(){
+    console.log("creating map...")
     var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
     ctx.canvas.width  = window.innerWidth;
@@ -36,8 +37,8 @@ export default class Board {
 
     //hard code for the map
     //vertices
-    var brain = new Vertex(10,0,200,50,250)
-    var lung1 = new Vertex(10,0,0,250,150)
+    var brain = new Vertex(10,0,0,50,250)
+    var lung1 = new Vertex(10,0,200,250,150)
     var lung2 = new Vertex(10,0,0,250,350)
     var heart = new Vertex(10,0,0,450,150)
     var liver = new Vertex(10,0,0,500,350)
@@ -46,9 +47,10 @@ export default class Board {
     var kidney2 = new Vertex(10,200,0,800,480)
 
     this.vertices = [brain, lung1, lung2, heart, liver, stomach, kidney1, kidney2]
-
+    console.log(this.vertices)
     //initialize edges
     var edge1 = new Edge(brain,lung1)
+    edge1.setAntiFlow(-10)
     var edge2 = new Edge(brain,lung2)
     var edge3 = new Edge(lung1,heart)
     var edge4 = new Edge(heart,liver)
@@ -137,7 +139,6 @@ export default class Board {
       var hyp = Math.floor(Math.sqrt(Math.pow(distX,2)+Math.pow(distY,2)))
       if (hyp < 50) {
         self.hover = neighbors[i]
-        console.log("hover neighbor")
         cb()
         break
       }

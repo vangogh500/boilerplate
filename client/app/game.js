@@ -8,10 +8,7 @@ class Game {
   initialize() {
     // Board(numberOfVertices, numberOfGenerators, numberOfSpawners)
     self.board = new Board(10,1,1);
-    self.board.createMap();
     self.ctx = self.canvas.getContext("2d");
-    self.board.drawMap(self.ctx);
-
     //event listener
     var elemLeft = self.canvas.offsetLeft
     var elemTop = self.canvas.offsetTop
@@ -37,7 +34,7 @@ class Game {
     return self.win
   }
   update() {
-    draw();
+    this.draw();
     board.updateBoard();
   }
 }
@@ -48,18 +45,17 @@ class Game {
 export function main() {
   var theGame = new Game();
   theGame.initialize()
-  run()
-  function run() {
+  run(0)
+  function run(i) {
     var start=Date.now();
-    var i=0;
     setTimeout(function()
     {
-      i++
       if(i<100)
       {
         theGame.update()
-        run();
+        i++
+        run(i);
       }
-    },start+1000-Date.now())
+    },start+100-Date.now())
   }
 }

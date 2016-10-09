@@ -3,9 +3,7 @@ export default class Edge {
     this.vertexA = vertexA;
     this.vertexB = vertexB;
     this.antiFlow = 0;
-    this.antiDownFlow=0;
     this.virFlow = 0;
-    this.virDownFlow=0;
   }
 
   get getVertexA(){
@@ -34,18 +32,50 @@ export default class Edge {
     this.antiFlow = antiFlow;
   }
 
-  setVir(virFlow)
+  setVirFlow(virFlow)
   {
-this.virFlow = virFlow;
+    this.virFlow = virFlow;
   }
 
 
   update()
   {
-    //A to B
-    this.vertexA.antibodyCount=-this.antiflow;
-    this.vertexB.antibodyCount=+this.antiflow;
-    this.vertexA.virusCount=-this.virflow;
-    this.vertexB.virusCount=+this.virflow;
+    //
+    var resultAA=this.vertexA.antibodyCount - this.antiFlow;
+    var resultBA=this.vertexB.antibodyCount + this.antiFlow;
+    var resultAV=this.vertexA.virusCount - this.virFlow;
+    var resultBV=this.vertexB.virusCount + this.virFlow;
+    if(resultAA<0||resultBA<0)
+    {
+      if(resultAA<0)
+      {
+        this.vertexB.antibodyCount=this.vertexA.antibodyCount + this.vertexB.antibodyCount;
+        this.vertexA.antibodyCount=0;
+      }
+
+      this.antiFlow=0;
+    }
+    else{
+      this.vertexA.antibodyCount= resultAA;
+      this.vertexB.antibodyCount = resultBA;
+    }
+    if(resultAV<0||resultBV<0)
+    {
+
+      if(resultAV<0)
+      {
+        this.vertexB.virusCount=this.vertexA.virusCount+this.vertexB.virusCount;
+        this.vertexA.virusCount=0;
+      }
+      else if(resultBV<0){
+        this.vertexA.virusCount=this.vertexA.virusCount+this.vertexB.virusCount;
+        this.vertexB.virusCount=0;
+      }
+      this.virFlow=0;
+    }
+    else{
+      this.vertexA.virusCount=resultAV;
+      this.vertexB.virusCount= resultBV;
+    }
   }
 }
