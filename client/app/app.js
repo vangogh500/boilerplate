@@ -17,23 +17,9 @@ class App extends React.Component {
   }
 }
 
-class Test extends React.Component {
-  render() {
-    return (
-      <div className = "deep-orange lighten-3">
-        <canvas id="canvas"></canvas>
-      </div>
-    )
-  }
-}
-
 
 ReactDOM.render((
   <Router>
     <Route path="/" component={App} />
-    <Route path="/test" component={Test} />
   </Router>
 ), document.getElementById('app'));
-
-console.log(main)
-main()

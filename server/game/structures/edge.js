@@ -1,4 +1,4 @@
-export default class Edge {
+module.exports = class Edge {
   constructor(vertexA, vertexB){
     this.vertexA = vertexA;
     this.vertexB = vertexB;
@@ -15,8 +15,18 @@ export default class Edge {
   }
 
   // returns null if vertex is not contained, otherwise returns other vertex
+  getOtherVertex(vertex) {
+    if (this.vertexA == vertex){
+      return this.vertexB
+    }
+    else if(this.vertexB == vertex) {
+      return this.vertexA
+    }
+    else {
+      return null
+    }
+  }
   
-
   setAntiFlow(antiFlow)
   {
     this.antiFlow = antiFlow;
@@ -26,7 +36,6 @@ export default class Edge {
   {
     this.virFlow = virFlow;
   }
-
 
   update()
   {

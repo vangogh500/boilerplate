@@ -9,6 +9,9 @@ server.listen(8080)
 
 var Room = require('../game/room.js')
 var Player = require('../game/player.js')
+var Game = require('../game/game.js')
+
+
 
 var lobby = [new Room(), new Room()]
 io.sockets.on('connection', function (socket) {
@@ -33,7 +36,21 @@ io.sockets.on('connection', function (socket) {
     }
   })
   socket.on("startGame", function() {
-    player.socket.emit("initGame")
+    var game = new Game();
+    player.socket.emit("initGame", game.board)
+    run(0)
+    function run(i) {
+      var start=Date.now();
+      setTimeout(function() {
+        if(i<200)
+        {
+          game.update()
+          player.socket.emit("updateGameState", game.board)
+          i++
+          run(i);
+        }
+      },start+100-Date.now())
+    }
   })
   socket.on("getLobby", function() {
     console.log("getLobby")
