@@ -25,31 +25,6 @@ export default class Board {
     ctx.canvas.width  = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
 
-    //hard code for the map
-    //vertices
-    var brain = new Vertex(10,0,0,50,250)
-    var lung1 = new Vertex(10,0,200,250,150)
-    var lung2 = new Vertex(10,0,0,250,350)
-    var heart = new Vertex(10,0,0,450,150)
-    var liver = new Vertex(10,0,0,500,350)
-    var stomach = new Vertex(10,0,0,675,300)
-    var kidney1 = new Vertex(10,0,0,550,480)
-    var kidney2 = new Vertex(10,200,0,800,480)
-
-    this.vertices = [brain, lung1, lung2, heart, liver, stomach, kidney1, kidney2]
-    console.log(this.vertices)
-    //initialize edges
-    var edge1 = new Edge(brain,lung1)
-    edge1.setAntiFlow(-10)
-    var edge2 = new Edge(brain,lung2)
-    var edge3 = new Edge(lung1,heart)
-    var edge4 = new Edge(heart,liver)
-    var edge5 = new Edge(heart,stomach)
-    var edge6 = new Edge(stomach,kidney1)
-    var edge7 = new Edge(stomach,kidney2)
-
-    this.edges = [edge1, edge2, edge3, edge4, edge5, edge6, edge7]
-
     //skeleton vertices
     var b1 = new Vertex(12,0,200, 100,    600)
     var b2 = new Vertex(12,0,0,   400,  600)
