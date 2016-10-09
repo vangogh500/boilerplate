@@ -29,12 +29,20 @@ export default class GameContainer extends React.Component {
       socket.on('updateRoom', (room) => {
         this.setState({ room: room })
       })
+      socket.on('initGame', () => {
+        console.log('init game')
+        this.setState({})
+      })
     }
     else if(e.target.name == 'update') {
       this.state.socket.emit('getLobby')
     }
     else if(e.target.name == 'createRoom') {
       this.state.socket.emit('createRoom')
+    }
+    else if(e.target.name == 'start') {
+      console.log("emit start")
+      this.state.socket.emit('starGamet')
     }
     else {
       this.state.socket.emit('joinRoom', id)
@@ -93,6 +101,7 @@ export default class GameContainer extends React.Component {
                   <h5 className="center">Virus</h5>
                   <h6 className="center">{this.state.room.players[1] || "waiting for player..."}</h6>
                 </div>
+                <a name="start" className="btn" onClick={(e) => this.handleClick(e)}>Start</a>
               </div>
             </div>
           )

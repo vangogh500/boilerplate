@@ -27,8 +27,13 @@ io.sockets.on('connection', function (socket) {
     room.addPlayer(player.id)
     socket.emit("joinRoom", room)
     if(room.isFull()) {
-      console.log("init game")
+      room.players.forEachPlayer(function(p) {
+        p.socket.emit("initGame")
+      })
     }
+  })
+  socket.on("startGame", function() {
+    player.socket.emit("initGame")
   })
   socket.on("getLobby", function() {
     console.log("getLobby")
