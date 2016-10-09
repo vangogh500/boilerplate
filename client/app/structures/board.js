@@ -1,6 +1,7 @@
 // Generates Board and vertexs
 
 import Vertex from './vertex.js';
+import InnerVertex from './InnerVertex.js'
 import Edge from './edge.js';
 import Generator from './generator.js';
 import Spawner from './spawner.js';
@@ -36,32 +37,67 @@ export default class Board {
 
     //hard code for the map
     //vertices
-    var brain = new Vertex(10,0,200,50,250)
-    var lung1 = new Vertex(10,0,0,250,150)
-    var lung2 = new Vertex(10,0,0,250,350)
-    var heart = new Vertex(10,0,0,450,150)
-    var liver = new Vertex(10,0,0,500,350)
-    var stomach = new Vertex(10,0,0,675,300)
-    var kidney1 = new Vertex(10,0,0,550,480)
-    var kidney2 = new Vertex(10,200,0,800,480)
 
-    this.vertices = [brain, lung1, lung2, heart, liver, stomach, kidney1, kidney2]
+    //skeleton vertices
+    var b1 = new Vertex(12,0,200, 100,    600)
+    var b2 = new Vertex(12,0,0,   400,  600)
+    var b3 = new Vertex(12,200,0, 700,  600)
+    var m1 = new Vertex(12,0,0,   250,  350)
+    var m2 = new Vertex(12,0,0,   550,  350)
+    var t1 = new Vertex(16,200,200,   400,  100)
 
-    //initialize edges
-    var edge1 = new Edge(brain,lung1)
-    var edge2 = new Edge(brain,lung2)
-    var edge3 = new Edge(lung1,heart)
-    var edge4 = new Edge(heart,liver)
-    var edge5 = new Edge(heart,stomach)
-    var edge6 = new Edge(stomach,kidney1)
-    var edge7 = new Edge(stomach,kidney2)
 
-    this.edges = [edge1, edge2, edge3, edge4, edge5, edge6, edge7]
+    //TODO consider random positions for inner vertices
+    //var randX = Math.floor(Math.random() * 2);
+    //var randY = Math.floor(Math.random() * 1);
 
-    //draw edges
+    //inner points (innerTop, innerMiddle, innerBottomLeft, innerBotttomRight)
+    var iT  = new InnerVertex(9,0,0,  400, 266, [t1, m1, m2] )
+    var iM  = new InnerVertex(9,0,0,  400, 433, [m1, m2, b2] )
+    var iBL = new InnerVertex(9,0,0,  250, 500, [b1, b2, m1] )
+    var iBR = new InnerVertex(9,0,0,  550, 500, [b2, b3, m2] )
 
-    //draw vertecies
 
+    this.vertices = [b1,b2,b3,m1,m2,t1, iT, iM, iBL, iBR]
+
+    //skeleton edges
+    var edge1 = new Edge(b1,m1)
+    var edge2 = new Edge(b3,m2)
+    var edge3 = new Edge(m1,t1)
+    var edge4 = new Edge(m2,t1)
+
+    this.edges = [edge1, edge2, edge3, edge4]
+
+    for ( var i = 6; i < 10; i++ ){
+    var randomInFour = Math.floor(Math.random() * 3 + 1);
+    if (randomInFour == 1) {
+      this.edges.push(new Edge(this.vertices[i], this.vertices[i].getNeighbors[0]))
+    }
+    if (randomInFour == 2) {
+      this.edges.push(new Edge(this.vertices[i], this.vertices[i].getNeighbors[0]))
+      this.edges.push(new Edge(this.vertices[i], this.vertices[i].getNeighbors[1]))
+    }
+    if (randomInFour == 3) {
+      this.edges.push(new Edge(this.vertices[i], this.vertices[i].getNeighbors[0]))
+      this.edges.push(new Edge(this.vertices[i], this.vertices[i].getNeighbors[1]))
+      this.edges.push(new Edge(this.vertices[i], this.vertices[i].getNeighbors[2]))
+
+    }
+    if (randomInFour == 4) {
+      this.edges.push(new Edge(this.vertices[i], this.vertices[i].getNeighbors[0]))
+      this.edges.push(new Edge(this.vertices[i], this.vertices[i].getNeighbors[1]))
+      this.edges.push(new Edge(this.vertices[i], this.vertices[i].getNeighbors[2]))
+      this.edges.push(new Edge(this.vertices[i], this.vertices[i].getNeighbors[3]))
+    }
+  }
+
+/*
+    for ( var i = 0; i < (this.numberOfVertices - 6); i++ ){
+
+      this.edges.push(new Edge( ))
+    }
+
+*/
     /*
     var edges = [];
     for (i = 0; i < (this.getNumberOfVertices - 1); i++){
@@ -107,19 +143,19 @@ export default class Board {
   drawVertex(vertex, ctx){
     // get canvas
     if(vertex == self.selected) {
-        ctx.lineWidth = 15
+        ctx.lineWidth = 12
       }
     else if(vertex == self.hover) {
-      ctx.lineWidth = 5
+      ctx.lineWidth = 4
     }
     ctx.beginPath();
     ctx.fillStyle = vertex.getColor() // color based on population of both sides
-    ctx.arc(vertex.getXCoord, vertex.getYCoord, 50,0,2*Math.PI);
+    ctx.arc(vertex.getXCoord, vertex.getYCoord, (vertex.getSpawnRate * 4),0,2*Math.PI);
     ctx.fill();
 
     ctx.beginPath();
     ctx.strokeStyle="black";
-    ctx.arc(vertex.getXCoord, vertex.getYCoord, 50,0,2*Math.PI);
+    ctx.arc(vertex.getXCoord, vertex.getYCoord, (vertex.getSpawnRate * 4),0,2*Math.PI);
     ctx.stroke();
 
     ctx.lineWidth = 1
