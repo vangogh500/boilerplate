@@ -1,6 +1,11 @@
+import Antibody from '../units/antibody.js';
+import Virus from '../units/virus.js';
+
 // Constructor for node with spawnRate, virusCount (0), antibodyCount (0)
 export default class Vertex{
   constructor(spawnRate, virusCount, antibodyCount, xCoord, yCoord){
+    //console.log("virusCount "+virusCount)
+
     this.spawnRate = spawnRate;
     this.virusCount = virusCount;
     this.antibodyCount = antibodyCount;
@@ -8,23 +13,30 @@ export default class Vertex{
     this.yCoord = yCoord;
   }
 
+//
+get getSpawnRate(){
+  return (this.spawnRate);
+}
+
 //added gets for color method
-  get getAntibodyCount() {
-    return (this.antibodyCount)
-  }
   get getVirusCount() {
-    return (this.virusCount)
+    return this.virusCount;
+    //return 5
   }
+  get getAntibodyCount() {
+    return this.antibodyCount;
+  }
+
 //to determine color transition, returns a string
-  color(vertex) {
-    var r = 225 - (vertex.getAntibodyCount)
-    var g = 225 - (vertex.getAntibodyCount) - (vertex.getVirusCount)
-    var b = 225 - (vertex.getVirusCount)
-    if (r < 100 && vertex.getVirusCount > 0){
-      r = 100
+  getColor() {
+    var r = 225 - (this.getAntibodyCount);
+    var g = 225 - (this.getAntibodyCount) - (this.getVirusCount);
+    var b = 225 - (this.getVirusCount);
+    if (r < 100 && this.getVirusCount > 0){
+      r = 100;
     }
-    if (b < 100 && vertex.getAntibodyCount > 0){
-      b = 100
+    if (b < 100 && this.getAntibodyCount > 0){
+      b = 100;
     }
     return ('rgb(' + r + ',' + g + ',' + b + ')');
   }
@@ -36,7 +48,8 @@ export default class Vertex{
   get getYCoord(){
     return this.yCoord;
   }
-  updateCellCount()
+
+  update()
   {
     //Update Virus counts
     //Equal counts
@@ -48,8 +61,14 @@ export default class Vertex{
         this.antibodyCount=Math.floor(this.antibodyCount*0.8);
       }
       else {
-        this.virusCount-=1;
-        this.antibodyCount-=1;
+        if(this.virusCount!=0)
+        {
+          this.virusCount=this.virusCount-1;
+        }
+        if(this.antibodyCount!=0)
+        {
+          this.antibodyCount= this.antibodyCount-1;
+        }
 
       }
     }
@@ -57,12 +76,12 @@ export default class Vertex{
     else {
       if(this.virusCount>this.antibodyCount)
       {
-        var div=this.virusCount/(this.antibodyCount+this.virusCount)
+        var div=this.virusCount/(this.antibodyCount+this.virusCount);
         this.virusCount=Math.floor(this.virusCount*(1-(0.2-(div*0.2))));
         this.antibodyCount=Math.floor(this.antibodyCount*(1-(div*0.2)));
       }
       else{
-        var div=this.antibodyCount/(this.antibodyCount+this.virusCount)
+        var div=this.antibodyCount/(this.antibodyCount+this.virusCount);
         this.virusCount=Math.floor(this.virusCount*(1-(div*0.2)));
         this.antibodyCount=Math.floor(this.antibodyCount*(1-(0.2-(div*0.2))));
       }
