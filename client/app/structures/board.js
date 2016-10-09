@@ -57,31 +57,6 @@ export default class Board {
     var edge7 = new Edge(stomach,kidney2)
 
     this.edges = [edge1, edge2, edge3, edge4, edge5, edge6, edge7]
-
-    //draw edges
-
-    //draw vertecies
-
-    /*
-    var edges = [];
-    for (i = 0; i < (this.getNumberOfVertices - 1); i++){
-      self.edges[i] = new Edge(vertices[i], vertices[i+1]);
-    }
-    */
-    //draw edges first so that vertices overlay
-
-    //draw edges
-    /*
-    for (var i = 0; i < edges.length; i++){
-      this.drawEdge(edges[i])
-    }
-    */
-    //draw vertices
-    /*
-    for (var i = 0; i < vertices.length; i++){
-      this.drawVertex(vertices[i])
-    }
-    */
   }
 
   getNeighbors(vertex){
@@ -169,6 +144,13 @@ export default class Board {
     }
   }
   updateBoard(){
-
+    for(var i=0;i<this.vertices.length;i++)
+    {
+      this.vertices[i].update();
+    }
+    for(var i=0;i<this.edges.length;i++)
+    {
+      this.edges[i].update();
+    }
   }
 }

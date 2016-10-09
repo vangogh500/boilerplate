@@ -37,17 +37,29 @@ class Game {
     return self.win
   }
   update() {
-    // requestAnimationFrame(update);
+    draw();
+    board.updateBoard();
   }
 }
+
+
 
 
 export function main() {
   var theGame = new Game();
   theGame.initialize()
-
-  /* while (!theGame.isOver()){
-    theGame.update()
+  run()
+  function run() {
+    var start=Date.now();
+    var i=0;
+    setTimeout(function()
+    {
+      i++
+      if(i<100)
+      {
+        theGame.update()
+        run();
+      }
+    },start+1000-Date.now())
   }
-  */
 }
