@@ -144,6 +144,72 @@ export default class Map {
         this.vertices[7].antibodyCount = 200;
         this.vertices[8].virusCount = 200;
         break;
+      case 2:
+        var scaleVal = 500;
+        this.vertices = []
+        this.edges = []
+
+        for(var i = 0; i < 16; i++){
+          this.vertices.push(new Vertex(10,0,0,0,0))
+        }
+
+        for(var i = 0; i < 16; i++){
+          if (i < 3){ this.vertices[i].setXCoord( 0 * scaleVal ) }
+          else if (i < 5){ this.vertices[i].setXCoord( .2 * scaleVal ) }
+          else if (i < 8){ this.vertices[i].setXCoord( .40 * scaleVal ) }
+          else if (i < 11){ this.vertices[i].setXCoord( .65 * scaleVal ) }
+          else if (i < 13){ this.vertices[i].setXCoord( .8 * scaleVal ) }
+          else { this.vertices[i].setXCoord( 1 * scaleVal ) }
+        }
+
+        this.vertices[0].setYCoord(.5 * scaleVal)
+        this.vertices[1].setYCoord(.8 * scaleVal)
+        this.vertices[2].setYCoord(1 * scaleVal)
+        this.vertices[3].setYCoord(.8 * scaleVal)
+        this.vertices[4].setYCoord(1 * scaleVal)
+        this.vertices[5].setYCoord(0 * scaleVal)
+        this.vertices[6].setYCoord(.4 * scaleVal)
+        this.vertices[7].setYCoord(.625 * scaleVal)
+        this.vertices[8].setYCoord(.4 * scaleVal)
+        this.vertices[9].setYCoord(.65 * scaleVal)
+        this.vertices[10].setYCoord(1 * scaleVal)
+        this.vertices[11].setYCoord(0 * scaleVal)
+        this.vertices[12].setYCoord(.25 * scaleVal)
+        this.vertices[13].setYCoord(0 * scaleVal)
+        this.vertices[14].setYCoord(.25 * scaleVal)
+        this.vertices[15].setYCoord(.75 * scaleVal)
+
+
+        for(var i = 0; i < 20; i++){
+          this.edges.push(new Edge(this.vertices[0], this.vertices[1]))
+        }
+
+        this.edges[0] = new Edge(this.vertices[5], this.vertices[11])
+        this.edges[1] = new Edge(this.vertices[11], this.vertices[13])
+        this.edges[2] = new Edge(this.vertices[13], this.vertices[14])
+        this.edges[3] = new Edge(this.vertices[14], this.vertices[15])
+        this.edges[4] = new Edge(this.vertices[15], this.vertices[10])
+        this.edges[5] = new Edge(this.vertices[10], this.vertices[4])
+        this.edges[6] = new Edge(this.vertices[4], this.vertices[2])
+        this.edges[7] = new Edge(this.vertices[2], this.vertices[1])
+        this.edges[8] = new Edge(this.vertices[1], this.vertices[0])
+        this.edges[9] = new Edge(this.vertices[0], this.vertices[5])
+        this.edges[10] = new Edge(this.vertices[6], this.vertices[5])
+        this.edges[11] = new Edge(this.vertices[6], this.vertices[0])
+        this.edges[12] = new Edge(this.vertices[6], this.vertices[7])
+        this.edges[13] = new Edge(this.vertices[7], this.vertices[8])
+        this.edges[14] = new Edge(this.vertices[7], this.vertices[3])
+        this.edges[15] = new Edge(this.vertices[3], this.vertices[2])
+        this.edges[16] = new Edge(this.vertices[8], this.vertices[12])
+        this.edges[17] = new Edge(this.vertices[12], this.vertices[13])
+        this.edges[18] = new Edge(this.vertices[9], this.vertices[15])
+        this.edges[19] = new Edge(this.vertices[9], this.vertices[10])
+        this.edges[20] = new Edge(this.vertices[8], this.vertices[9])
+
+        this.vertices[2].antibodyCount = 200;
+        this.vertices[13].virusCount = 200;
+
+
 
       default:
 

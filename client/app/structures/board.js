@@ -19,7 +19,8 @@ export default class Board {
     return this.numberOfVertices
   }
   createMap(){
-    var map = new Map(1);
+    //Math.floor(Math.random()*3)
+    var map = new Map(2);
     map.genMap();
     this.vertices = map.getVertices
     this.edges = map.getEdges
