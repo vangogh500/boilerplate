@@ -13,6 +13,11 @@ export default class Vertex{
     this.yCoord = yCoord;
   }
 
+//
+get getSpawnRate(){
+  return (this.spawnRate);
+}
+
 //added gets for color method
   get getVirusCount() {
     return this.virusCount;

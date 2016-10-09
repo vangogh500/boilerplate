@@ -1,6 +1,7 @@
 // Generates Board and vertexs
 
 import Vertex from './vertex.js';
+import InnerVertex from './InnerVertex.js'
 import Edge from './edge.js';
 import Generator from './generator.js';
 import Spawner from './spawner.js';
@@ -23,17 +24,6 @@ export default class Board {
     var ctx = c.getContext("2d");
     ctx.canvas.width  = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
-
-    // initialize vertices
-    // Vertex(spawnRate, virusCount, antibodyCount, xCoord, yCoord)
-    //added viruses and antibodies to test color transition
-
-    /*
-    var vertices = [];
-    for (i = 0; i < this.getNumberOfVertices; i++){
-      vertices[i] = new Vertex(10,i*20,0, (50 + (i*200)) , (50 + (i%2)*50) );
-    }
-    */
 
     //hard code for the map
     //vertices
@@ -59,6 +49,60 @@ export default class Board {
     var edge7 = new Edge(stomach,kidney2)
 
     this.edges = [edge1, edge2, edge3, edge4, edge5, edge6, edge7]
+
+    //skeleton vertices
+    var b1 = new Vertex(12,0,200, 100,    600)
+    var b2 = new Vertex(12,0,0,   400,  600)
+    var b3 = new Vertex(12,200,0, 700,  600)
+    var m1 = new Vertex(12,0,0,   250,  350)
+    var m2 = new Vertex(12,0,0,   550,  350)
+    var t1 = new Vertex(16,200,200,   400,  100)
+
+
+    //TODO consider random positions for inner vertices
+    //var randX = Math.floor(Math.random() * 2);
+    //var randY = Math.floor(Math.random() * 1);
+
+    //inner points (innerTop, innerMiddle, innerBottomLeft, innerBotttomRight)
+    var iT  = new InnerVertex(9,0,0,  400, 266, [t1, m1, m2] )
+    var iM  = new InnerVertex(9,0,0,  400, 433, [m1, m2, b2] )
+    var iBL = new InnerVertex(9,0,0,  250, 500, [b1, b2, m1] )
+    var iBR = new InnerVertex(9,0,0,  550, 500, [b2, b3, m2] )
+
+
+    this.vertices = [b1,b2,b3,m1,m2,t1, iT, iM, iBL, iBR]
+
+    //skeleton edges
+    var edge1 = new Edge(b1,m1)
+    var edge2 = new Edge(b3,m2)
+    var edge3 = new Edge(m1,t1)
+    var edge4 = new Edge(m2,t1)
+
+    this.edges = [edge1, edge2, edge3, edge4]
+
+    for ( var i = 6; i < 10; i++ ){
+    var randomInFour = Math.floor(Math.random() * 3 + 1);
+    if (randomInFour == 1) {
+      this.edges.push(new Edge(this.vertices[i], this.vertices[i].getNeighbors[0]))
+    }
+    if (randomInFour == 2) {
+      this.edges.push(new Edge(this.vertices[i], this.vertices[i].getNeighbors[0]))
+      this.edges.push(new Edge(this.vertices[i], this.vertices[i].getNeighbors[1]))
+    }
+    if (randomInFour == 3) {
+      this.edges.push(new Edge(this.vertices[i], this.vertices[i].getNeighbors[0]))
+      this.edges.push(new Edge(this.vertices[i], this.vertices[i].getNeighbors[1]))
+      this.edges.push(new Edge(this.vertices[i], this.vertices[i].getNeighbors[2]))
+
+    }
+    if (randomInFour == 4) {
+      this.edges.push(new Edge(this.vertices[i], this.vertices[i].getNeighbors[0]))
+      this.edges.push(new Edge(this.vertices[i], this.vertices[i].getNeighbors[1]))
+      this.edges.push(new Edge(this.vertices[i], this.vertices[i].getNeighbors[2]))
+      this.edges.push(new Edge(this.vertices[i], this.vertices[i].getNeighbors[3]))
+    }
+  }
+
   }
 
   getNeighbors(vertex){
@@ -84,19 +128,19 @@ export default class Board {
   drawVertex(vertex, ctx){
     // get canvas
     if(vertex == self.selected) {
-        ctx.lineWidth = 15
+        ctx.lineWidth = 12
       }
     else if(vertex == self.hover) {
-      ctx.lineWidth = 5
+      ctx.lineWidth = 4
     }
     ctx.beginPath();
     ctx.fillStyle = vertex.getColor() // color based on population of both sides
-    ctx.arc(vertex.getXCoord, vertex.getYCoord, 50,0,2*Math.PI);
+    ctx.arc(vertex.getXCoord, vertex.getYCoord, (vertex.getSpawnRate * 4),0,2*Math.PI);
     ctx.fill();
 
     ctx.beginPath();
     ctx.strokeStyle="black";
-    ctx.arc(vertex.getXCoord, vertex.getYCoord, 50,0,2*Math.PI);
+    ctx.arc(vertex.getXCoord, vertex.getYCoord, (vertex.getSpawnRate * 4),0,2*Math.PI);
     ctx.stroke();
 
     ctx.lineWidth = 1
