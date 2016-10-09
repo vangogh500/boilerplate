@@ -14,6 +14,20 @@ module.exports = class Board {
   get getNumberOfVertices(){
     return this.numberOfVertices
   }
+  makeMove(vertices) {
+    console.log(vertices)
+    console.log(this.edges)
+    for(var i=0; i< this.edges.length; i++) {
+      if (this.edges[i].vertexA.xCoord == vertices.vertexA.xCoord && this.edges[i].vertexA.yCoord == vertices.vertexA.yCoord && this.edges[i].vertexB.xCoord == vertices.vertexB.xCoord && this.edges[i].vertexB.yCoord == vertices.vertexB.yCoord) {
+        console.log("anti flow 5")
+        this.edges[i].antiFlow = 5
+      }
+      else if (this.edges[i].vertexA.xCoord == vertices.vertexB.xCoord && this.edges[i].vertexA.yCoord == vertices.vertexB.yCoord && this.edges[i].vertexB.xCoord == vertices.vertexA.xCoord && this.edges[i].vertexB.yCoord == vertices.vertexA.yCoord) {
+        console.log("anti flow -5")
+        this.edges[i].antiFlow = -5
+      }
+    }
+  }
 
   createMap(){
     console.log("creating map...")

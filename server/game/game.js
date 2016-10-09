@@ -14,6 +14,9 @@ class Game {
   update() {
     this.board.updateBoard()
   }
+  makeMove(vertices) {
+    this.board.makeMove(vertices)
+  }
 }
 
 module.exports = Game

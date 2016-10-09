@@ -32,7 +32,7 @@ export default class GameContainer extends React.Component {
       })
       socket.on('initGame', (board) => {
         console.log("test")
-        var game = new Game(board)
+        var game = new Game(board, socket)
         game.initialize()
         game.draw()
         this.setState({ game: game })

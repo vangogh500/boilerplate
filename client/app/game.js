@@ -1,10 +1,11 @@
 import Board from './structures/board.js';
 import Vertex from './structures/vertex.js';
 export default class Game {
-  constructor(board) {
+  constructor(board, socket) {
     self.win = false
     self.canvas = document.getElementById("canvas")
-    self.board = new Board(board);
+    self.board = new Board(board)
+    self.socket = socket
   }
   initialize() {
     // Board(numberOfVertices, numberOfGenerators, numberOfSpawners)
@@ -12,12 +13,13 @@ export default class Game {
     self.canvas.width = canvas.clientWidth;
     self.canvas.height = canvas.clientHeight;
     //event listener
+
     var elemLeft = self.canvas.offsetLeft
     var elemTop = self.canvas.offsetTop
     self.canvas.addEventListener("click", (event) => {
       var x = event.pageX - elemLeft,
         y = event.pageY - elemTop;
-      board.onClick(x,y)
+      board.onClick(x,y,self.socket)
       this.draw()
     })
     self.canvas.addEventListener("mousemove", (event) => {

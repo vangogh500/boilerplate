@@ -76,10 +76,26 @@ export default class Board {
     ctx.stroke();
   }
 
-  onClick(x,y) {
+  onClick(x,y, socket) {
+    if(self.selectedNeighbors) {
+      for(var i=0; i<self.selectedNeighbors.length; i++) {
+        var distX = Math.abs(self.selectedNeighbors[i].xCoord - x)
+        var distY = Math.abs(self.selectedNeighbors[i].yCoord - y)
+        var hyp = Math.floor(Math.sqrt(Math.pow(distX,2) + Math.pow(distY,2)))
+        if(hyp < 50) {
+          socket.emit('makeMove', { vertexA: self.selected, vertexB: self.selectedNeighbors[i] })
+          // call make move here
+          self.selected = null
+          self.hover = null
+          self.selectedNeighbors = null
+          return
+        }
+      }
+    }
     self.selected = null;
     self.hover = null;
-    this.selectedNeighbors = null;
+    self.selectedNeighbors = null;
+
     for(var i=0; i<this.vertices.length; i++) {
       var verX = this.vertices[i].xCoord
       var verY = this.vertices[i].yCoord
@@ -97,23 +113,23 @@ export default class Board {
             neighbors.push(this.edges[x].vertexA)
           }
         }
-        this.selectedNeighbors = neighbors
+        self.selectedNeighbors = neighbors
         break
       }
     }
   }
   onHover(x,y) {
-    if(this.selectedNeighbors) {
-      for(var i=0; i<this.selectedNeighbors.length; i++) {
-        var verX = this.selectedNeighbors[i].xCoord
-        var verY = this.selectedNeighbors[i].yCoord
+    if(self.selectedNeighbors) {
+      for(var i=0; i<self.selectedNeighbors.length; i++) {
+        var verX = self.selectedNeighbors[i].xCoord
+        var verY = self.selectedNeighbors[i].yCoord
 
         var distX = Math.abs(verX-x)
         var distY = Math.abs(verY-y)
 
         var hyp = Math.floor(Math.sqrt(Math.pow(distX,2)+Math.pow(distY,2)))
         if (hyp < 50) {
-          self.hover = this.selectedNeighbors[i]
+          self.hover = self.selectedNeighbors[i]
           break
         }
       }
