@@ -5,6 +5,7 @@ import InnerVertex from './InnerVertex.js'
 import Edge from './edge.js';
 import Generator from './generator.js';
 import Spawner from './spawner.js';
+import Map from './map.js';
 
 export default class Board {
   constructor(board){
@@ -14,6 +15,7 @@ export default class Board {
     this.vertices = board.vertices
     this.edges = board.edges
   }
+
   update(board) {
     this.vertices = board.vertices
     this.edges = board.edges

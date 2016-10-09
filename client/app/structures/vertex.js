@@ -49,6 +49,14 @@ get getSpawnRate(){
     return this.yCoord;
   }
 
+  setXCoord(x){
+    this.xCoord = x + 50
+  }
+
+  setYCoord(y){
+    this.yCoord = y + 50
+  }
+
   update()
   {
     //Update Virus counts
